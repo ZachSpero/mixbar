@@ -56,10 +56,24 @@ final class AppState: ObservableObject {
     private static let mutedKey = "mutedApps"
     private static let outputUIDKey = "preferredOutputUID"
     private static let displayScaleKey = "volumesAreDisplayScale"
+    private static let extraAudioAppsKey = "extraAudioApps"
+    private static let volumeAliasesKey = "appVolumeAliases"
+
+    // Local customization (set via `defaults write com.zachspero.mixbar.app ...`),
+    // not shipped in the repo:
+    //   extraAudioApps: [String]        extra bundle-id/name substrings to show
+    //   appVolumeAliases: [String:[String]]  apply an app's volume to extra
+    //       bundle IDs too - needed for multiprocess/Electron apps whose audio
+    //       plays from a helper process (e.g. <bundle>.helper).
+    private let extraAudioApps: [String]
+    private let volumeAliases: [String: [String]]
 
     init() {
         volumes = (defaults.dictionary(forKey: Self.volumesKey) as? [String: Int]) ?? [:]
         mutedPreviousVolumes = (defaults.dictionary(forKey: Self.mutedKey) as? [String: Int]) ?? [:]
+        extraAudioApps = ((defaults.array(forKey: Self.extraAudioAppsKey) as? [String]) ?? [])
+            .map { $0.lowercased() }
+        volumeAliases = (defaults.dictionary(forKey: Self.volumeAliasesKey) as? [String: [String]]) ?? [:]
 
         // Migrate values saved when the UI used the driver's 0-100 scale
         // (50 = unity) to the displayed 0-200 scale (100 = unity).
@@ -159,6 +173,12 @@ final class AppState: ObservableObject {
         if AudioApps.isLikelyAudioApp(bundleID: app.bundleID, name: app.name) {
             return true
         }
+        if !extraAudioApps.isEmpty {
+            let hay = ((app.bundleID ?? "") + " " + app.name).lowercased()
+            if extraAudioApps.contains(where: { hay.contains($0) }) {
+                return true
+            }
+        }
         if let bundleID = app.bundleID, isAudioActive(bundleID: bundleID, in: activeBundleIDs) {
             return true
         }
@@ -200,10 +220,23 @@ final class AppState: ObservableObject {
             return
         }
         let effective = mutedPreviousVolumes[bundleID] != nil ? 0 : saved
-        engine?.setVolume(driverVolume(effective), forPID: app.processIdentifier, bundleID: bundleID)
+        pushVolume(effective, pid: app.processIdentifier, bundleID: bundleID)
     }
 
     // MARK: Volumes
+
+    // Apply a displayed (0-200) volume to the engine for an app, plus any
+    // configured alias bundle IDs (for multiprocess apps whose audio plays
+    // from a helper process). Aliases are matched by bundle ID only (pid -1).
+    private func pushVolume(_ displayVolume: Int, pid: pid_t, bundleID: String?) {
+        let dv = driverVolume(displayVolume)
+        engine?.setVolume(dv, forPID: pid, bundleID: bundleID)
+        if let bundleID, let aliases = volumeAliases[bundleID] {
+            for alias in aliases {
+                engine?.setVolume(dv, forPID: -1, bundleID: alias)
+            }
+        }
+    }
 
     func volumeKey(for app: RunningApp) -> String {
         app.bundleID ?? "pid:\(app.id)"
@@ -228,17 +261,17 @@ final class AppState: ObservableObject {
             defaults.set(mutedPreviousVolumes, forKey: Self.mutedKey)
         }
 
-        engine?.setVolume(driverVolume(volume), forPID: app.id, bundleID: app.bundleID)
+        pushVolume(volume, pid: app.id, bundleID: app.bundleID)
     }
 
     func toggleMute(for app: RunningApp) {
         let key = volumeKey(for: app)
         if let previous = mutedPreviousVolumes[key] {
             mutedPreviousVolumes[key] = nil
-            engine?.setVolume(driverVolume(previous), forPID: app.id, bundleID: app.bundleID)
+            pushVolume(previous, pid: app.id, bundleID: app.bundleID)
         } else {
             mutedPreviousVolumes[key] = volume(for: app)
-            engine?.setVolume(0, forPID: app.id, bundleID: app.bundleID)
+            pushVolume(0, pid: app.id, bundleID: app.bundleID)
         }
         defaults.set(mutedPreviousVolumes, forKey: Self.mutedKey)
     }
@@ -248,7 +281,7 @@ final class AppState: ObservableObject {
             let key = volumeKey(for: app)
             guard let saved = volumes[key] else { continue }
             let effective = mutedPreviousVolumes[key] != nil ? 0 : saved
-            engine?.setVolume(driverVolume(effective), forPID: app.id, bundleID: app.bundleID)
+            pushVolume(effective, pid: app.id, bundleID: app.bundleID)
         }
     }
 

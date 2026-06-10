@@ -82,6 +82,23 @@ Your speakers / headphones
 
 Everything builds with plain `make` and `swift build`. No Xcode project.
 
+## Power-user customization
+
+Two optional preferences let you tailor the app list without rebuilding:
+
+```sh
+# Always show extra apps in the mixer (matched against bundle ID + name).
+defaults write com.zachspero.mixbar.app extraAudioApps -array com.example.SomeApp
+
+# Apply an app's slider to extra bundle IDs too. Needed for Electron /
+# multiprocess apps whose audio actually plays from a helper process, so the
+# slider reaches the sound:
+defaults write com.zachspero.mixbar.app appVolumeAliases \
+  -dict-add com.example.SomeApp '("com.example.SomeApp.helper")'
+```
+
+Relaunch MixBar after changing these. Both default to empty.
+
 ## Notes and limitations
 
 - Sliders run 0 to 200. 100 is the app's normal volume (the slider snaps
