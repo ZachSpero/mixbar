@@ -10,7 +10,7 @@ MIN        := -mmacosx-version-min=11.0
 CXX        := clang++
 OBJC       := clang
 
-INCLUDES   := -I. -IDeviceClients -IPublicUtility -I../shared
+INCLUDES   := -I. -IDeviceClients -IPublicUtility -I../Sources/MixBarEngine/vendor/shared
 DEFINES    := -DNDEBUG -DCoreAudio_UseSysLog=1
 WARN       := -Wall -Wno-deprecated-declarations -Wno-unused-parameter
 CXXFLAGS   := -std=gnu++14 -O2 -fPIC $(ARCHS) $(MIN) $(INCLUDES) $(DEFINES) $(WARN)
@@ -21,7 +21,7 @@ LDFLAGS    := -bundle $(ARCHS) $(MIN) \
 
 CPP_SRCS   := $(wildcard BGM_*.cpp) \
               $(wildcard DeviceClients/*.cpp) \
-              ../shared/BGM_Utils.cpp \
+              ../Sources/MixBarEngine/vendor/shared/BGM_Utils.cpp \
               PublicUtility/CACFArray.cpp \
               PublicUtility/CACFDictionary.cpp \
               PublicUtility/CACFNumber.cpp \

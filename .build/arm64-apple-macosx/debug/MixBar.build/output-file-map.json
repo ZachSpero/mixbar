@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/master.swiftdeps"
+  },
+  "/Users/zacharyspero/Code/mixbar/Sources/MixBar/main.swift": {
+    "dependencies": "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/main.d",
+    "object": "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/main.swift.o",
+    "swiftmodule": "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/main~partial.swiftmodule",
+    "swift-dependencies": "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/main.swiftdeps"
+  }
+}

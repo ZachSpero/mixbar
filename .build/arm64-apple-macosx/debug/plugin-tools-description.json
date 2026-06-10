@@ -1,0 +1,806 @@
+{
+  "builtTestProducts" : [
+
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.MixBar-arm64-apple-macosx15.0-debug.module" : {
+      "executable" : "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "fileList" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/sources",
+      "importPath" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/Sources/MixBar/main.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/MixBarEngine.mm.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMAudioDevice.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMBackgroundMusicDevice.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMDeviceControlSync.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMDeviceControlsList.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMPlayThrough.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMPlayThroughRTLogger.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/BGMDebugLogging.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CACFArray.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CACFDictionary.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CACFNumber.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CACFString.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CADebugMacros.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CADebugPrintf.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CADebugger.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAHALAudioDevice.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAHALAudioObject.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAHALAudioStream.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAHALAudioSystemObject.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAHostTimeBase.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAMutex.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAPThread.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CARingBuffer.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/shared/BGM_Utils.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/sources"
+        }
+      ],
+      "isLibrary" : false,
+      "moduleName" : "MixBar",
+      "moduleOutputPath" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/Modules/MixBar.swiftmodule",
+      "objects" : [
+        "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/main.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx13.0",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-Xcc",
+        "-fmodule-map-file=/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/module.modulemap",
+        "-Xcc",
+        "-I",
+        "-Xcc",
+        "/Users/zacharyspero/Code/mixbar/Sources/MixBarEngine/include",
+        "-module-cache-path",
+        "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-Xfrontend",
+        "-entry-point-function-name",
+        "-Xfrontend",
+        "MixBar_main",
+        "-swift-version",
+        "5",
+        "-F",
+        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+        "-sdk",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "mixbar"
+      ],
+      "outputFileMapPath" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/main.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/Modules/MixBar.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/zacharyspero/Code/mixbar/Sources/MixBar/main.swift"
+      ],
+      "tempsPath" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.mixbarctl-arm64-apple-macosx15.0-debug.module" : {
+      "executable" : "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "fileList" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/mixbarctl.build/sources",
+      "importPath" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/Sources/mixbarctl/main.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/MixBarEngine.mm.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMAudioDevice.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMBackgroundMusicDevice.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMDeviceControlSync.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMDeviceControlsList.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMPlayThrough.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMPlayThroughRTLogger.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/BGMDebugLogging.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CACFArray.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CACFDictionary.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CACFNumber.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CACFString.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CADebugMacros.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CADebugPrintf.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CADebugger.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAHALAudioDevice.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAHALAudioObject.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAHALAudioStream.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAHALAudioSystemObject.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAHostTimeBase.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAMutex.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAPThread.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CARingBuffer.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/shared/BGM_Utils.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/mixbarctl.build/sources"
+        }
+      ],
+      "isLibrary" : false,
+      "moduleName" : "mixbarctl",
+      "moduleOutputPath" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/Modules/mixbarctl.swiftmodule",
+      "objects" : [
+        "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/mixbarctl.build/main.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx13.0",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-Xcc",
+        "-fmodule-map-file=/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/module.modulemap",
+        "-Xcc",
+        "-I",
+        "-Xcc",
+        "/Users/zacharyspero/Code/mixbar/Sources/MixBarEngine/include",
+        "-module-cache-path",
+        "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-Xfrontend",
+        "-entry-point-function-name",
+        "-Xfrontend",
+        "mixbarctl_main",
+        "-swift-version",
+        "5",
+        "-F",
+        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+        "-sdk",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "mixbar"
+      ],
+      "outputFileMapPath" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/mixbarctl.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/mixbarctl.build/main.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/Modules/mixbarctl.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/zacharyspero/Code/mixbar/Sources/mixbarctl/main.swift"
+      ],
+      "tempsPath" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/mixbarctl.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "MixBar" : [
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "-module-name",
+      "MixBar",
+      "-package-name",
+      "mixbar",
+      "-incremental",
+      "-c",
+      "/Users/zacharyspero/Code/mixbar/Sources/MixBar/main.swift",
+      "-I",
+      "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx13.0",
+      "-enable-batch-mode",
+      "-index-store-path",
+      "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-Xcc",
+      "-fmodule-map-file=/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/module.modulemap",
+      "-Xcc",
+      "-I",
+      "-Xcc",
+      "/Users/zacharyspero/Code/mixbar/Sources/MixBarEngine/include",
+      "-module-cache-path",
+      "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-Xfrontend",
+      "-entry-point-function-name",
+      "-Xfrontend",
+      "MixBar_main",
+      "-swift-version",
+      "5",
+      "-F",
+      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+      "-sdk",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "mixbar",
+      "-driver-use-frontend-path",
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc"
+    ],
+    "mixbarctl" : [
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "-module-name",
+      "mixbarctl",
+      "-package-name",
+      "mixbar",
+      "-incremental",
+      "-c",
+      "/Users/zacharyspero/Code/mixbar/Sources/mixbarctl/main.swift",
+      "-I",
+      "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx13.0",
+      "-enable-batch-mode",
+      "-index-store-path",
+      "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-Xcc",
+      "-fmodule-map-file=/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/module.modulemap",
+      "-Xcc",
+      "-I",
+      "-Xcc",
+      "/Users/zacharyspero/Code/mixbar/Sources/MixBarEngine/include",
+      "-module-cache-path",
+      "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-Xfrontend",
+      "-entry-point-function-name",
+      "-Xfrontend",
+      "mixbarctl_main",
+      "-swift-version",
+      "5",
+      "-F",
+      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+      "-sdk",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "mixbar",
+      "-driver-use-frontend-path",
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "MixBar" : [
+      "MixBarEngine"
+    ],
+    "MixBarEngine" : [
+
+    ],
+    "mixbarctl" : [
+      "MixBarEngine"
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+
+  },
+  "traitConfiguration" : {
+    "enableAllTraits" : false
+  },
+  "writeCommands" : {
+    "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar-entitlement.plist" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<entitlement-plist>"
+        },
+        {
+          "kind" : "virtual",
+          "name" : "<com.apple.security.get-task-allow>"
+        }
+      ],
+      "outputFilePath" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar-entitlement.plist"
+    },
+    "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/Sources/MixBar/main.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/sources"
+    },
+    "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/main.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/MixBarEngine.mm.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMAudioDevice.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMBackgroundMusicDevice.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMDeviceControlSync.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMDeviceControlsList.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMPlayThrough.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMPlayThroughRTLogger.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/BGMDebugLogging.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CACFArray.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CACFDictionary.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CACFNumber.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CACFString.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CADebugMacros.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CADebugPrintf.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CADebugger.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAHALAudioDevice.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAHALAudioObject.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAHALAudioStream.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAHALAudioSystemObject.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAHostTimeBase.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAMutex.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAPThread.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CARingBuffer.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/shared/BGM_Utils.cpp.o"
+        }
+      ],
+      "outputFilePath" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.product/Objects.LinkFileList"
+    },
+    "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/mixbarctl-entitlement.plist" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<entitlement-plist>"
+        },
+        {
+          "kind" : "virtual",
+          "name" : "<com.apple.security.get-task-allow>"
+        }
+      ],
+      "outputFilePath" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/mixbarctl-entitlement.plist"
+    },
+    "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/mixbarctl.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/Sources/mixbarctl/main.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/mixbarctl.build/sources"
+    },
+    "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/mixbarctl.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/MixBarEngine.mm.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMAudioDevice.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMBackgroundMusicDevice.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMDeviceControlSync.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMDeviceControlsList.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMPlayThrough.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMPlayThroughRTLogger.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/BGMDebugLogging.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CACFArray.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CACFDictionary.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CACFNumber.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CACFString.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CADebugMacros.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CADebugPrintf.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CADebugger.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAHALAudioDevice.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAHALAudioObject.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAHALAudioStream.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAHALAudioSystemObject.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAHostTimeBase.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAMutex.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CAPThread.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/PublicUtility/CARingBuffer.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/shared/BGM_Utils.cpp.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/mixbarctl.build/main.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/mixbarctl.product/Objects.LinkFileList"
+    },
+    "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Library/Developer/CommandLineTools/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
+    }
+  }
+}

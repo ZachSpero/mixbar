@@ -1,0 +1,4 @@
+module MixBarEngine {
+    umbrella header "/Users/zacharyspero/Code/mixbar/Sources/MixBarEngine/include/MixBarEngine.h"
+    export *
+}
