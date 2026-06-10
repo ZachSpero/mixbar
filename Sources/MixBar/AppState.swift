@@ -30,7 +30,11 @@ struct OutputDevice: Identifiable, Hashable {
 
 @MainActor
 final class AppState: ObservableObject {
-    static let unityVolume = 50
+    /// Displayed volume scale: 0 to 200, where 100 is the app's normal
+    /// volume. The driver uses 0 to 100 with 50 as unity, so displayed
+    /// values are halved on the way in.
+    static let unityVolume = 100
+    static let maxVolume = 200
 
     @Published private(set) var engineRunning = false
     @Published private(set) var engineError: String?
@@ -50,10 +54,26 @@ final class AppState: ObservableObject {
     private static let volumesKey = "appVolumes"
     private static let mutedKey = "mutedApps"
     private static let outputUIDKey = "preferredOutputUID"
+    private static let displayScaleKey = "volumesAreDisplayScale"
 
     init() {
         volumes = (defaults.dictionary(forKey: Self.volumesKey) as? [String: Int]) ?? [:]
         mutedPreviousVolumes = (defaults.dictionary(forKey: Self.mutedKey) as? [String: Int]) ?? [:]
+
+        // Migrate values saved when the UI used the driver's 0-100 scale
+        // (50 = unity) to the displayed 0-200 scale (100 = unity).
+        if !defaults.bool(forKey: Self.displayScaleKey) {
+            volumes = volumes.mapValues { min($0 * 2, Self.maxVolume) }
+            mutedPreviousVolumes = mutedPreviousVolumes.mapValues { min($0 * 2, Self.maxVolume) }
+            defaults.set(volumes, forKey: Self.volumesKey)
+            defaults.set(mutedPreviousVolumes, forKey: Self.mutedKey)
+            defaults.set(true, forKey: Self.displayScaleKey)
+        }
+    }
+
+    /// Displayed 0-200 to the driver's 0-100.
+    private func driverVolume(_ displayed: Int) -> Int {
+        max(0, min(100, Int((Double(displayed) / 2.0).rounded())))
     }
 
     // MARK: Engine lifecycle
@@ -134,7 +154,7 @@ final class AppState: ObservableObject {
             return
         }
         let effective = mutedPreviousVolumes[bundleID] != nil ? 0 : saved
-        engine?.setVolume(effective, forPID: app.processIdentifier, bundleID: bundleID)
+        engine?.setVolume(driverVolume(effective), forPID: app.processIdentifier, bundleID: bundleID)
     }
 
     // MARK: Volumes
@@ -162,14 +182,14 @@ final class AppState: ObservableObject {
             defaults.set(mutedPreviousVolumes, forKey: Self.mutedKey)
         }
 
-        engine?.setVolume(volume, forPID: app.id, bundleID: app.bundleID)
+        engine?.setVolume(driverVolume(volume), forPID: app.id, bundleID: app.bundleID)
     }
 
     func toggleMute(for app: RunningApp) {
         let key = volumeKey(for: app)
         if let previous = mutedPreviousVolumes[key] {
             mutedPreviousVolumes[key] = nil
-            engine?.setVolume(previous, forPID: app.id, bundleID: app.bundleID)
+            engine?.setVolume(driverVolume(previous), forPID: app.id, bundleID: app.bundleID)
         } else {
             mutedPreviousVolumes[key] = volume(for: app)
             engine?.setVolume(0, forPID: app.id, bundleID: app.bundleID)
@@ -182,7 +202,7 @@ final class AppState: ObservableObject {
             let key = volumeKey(for: app)
             guard let saved = volumes[key] else { continue }
             let effective = mutedPreviousVolumes[key] != nil ? 0 : saved
-            engine?.setVolume(effective, forPID: app.id, bundleID: app.bundleID)
+            engine?.setVolume(driverVolume(effective), forPID: app.id, bundleID: app.bundleID)
         }
     }
 

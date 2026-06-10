@@ -50,8 +50,11 @@ If the driver fails to load, check `log show --last 5m --predicate
 - Relaunch race: an older quitting instance can restore the speakers as
   default AFTER a new instance set MixBar as default. The engine reasserts
   3 seconds after startup (reassertDefaultDevice).
-- Slider value 50 = unity gain. 0 to 100 maps to the driver's relative
-  volume curve.
+- Two volume scales exist. The driver and mixbarctl use 0-100 with 50 =
+  unity gain. The app UI displays 0-200 with 100 = unity (sticky snap zone
+  of plus or minus 5 around 100) and halves values before calling the
+  engine (AppState.driverVolume). Saved volumes are display scale; the
+  "volumesAreDisplayScale" UserDefaults flag marks migrated data.
 - `sudo launchctl kickstart -k system/com.apple.audio.coreaudiod` is blocked
   by SIP on Sequoia. Use `sudo killall coreaudiod`.
 

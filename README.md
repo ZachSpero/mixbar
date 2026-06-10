@@ -77,7 +77,9 @@ Everything builds with plain `make` and `swift build`. No Xcode project.
 
 ## Notes and limitations
 
-- The slider midpoint (50) is the app's normal volume; above that boosts it.
+- Sliders run 0 to 200. 100 is the app's normal volume (the slider snaps
+  gently to it), and above 100 boosts the app beyond its normal level.
+- `mixbarctl` uses the driver's raw scale, 0 to 100 with 50 as normal.
 - Some apps play audio from helper processes (Safari tabs, for example).
   Known helpers are mapped, but an obscure multiprocess app may not respond
   to its slider.

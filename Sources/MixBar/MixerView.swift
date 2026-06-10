@@ -143,9 +143,17 @@ struct AppVolumeRow: View {
                 Slider(
                     value: Binding(
                         get: { Double(state.volume(for: app)) },
-                        set: { state.setVolume(Int($0.rounded()), for: app) }
+                        set: { newValue in
+                            var volume = Int(newValue.rounded())
+                            // Slightly sticky at 100 so it's easy to land
+                            // back on the app's normal volume.
+                            if abs(volume - AppState.unityVolume) <= 5 {
+                                volume = AppState.unityVolume
+                            }
+                            state.setVolume(volume, for: app)
+                        }
                     ),
-                    in: 0...100
+                    in: 0...Double(AppState.maxVolume)
                 )
                 .controlSize(.mini)
                 .disabled(state.isMuted(app))
@@ -170,8 +178,8 @@ struct AppVolumeRow: View {
     private func speakerSymbol(for volume: Int) -> String {
         switch volume {
         case 0: return "speaker"
-        case ..<34: return "speaker.wave.1"
-        case ..<67: return "speaker.wave.2"
+        case ..<67: return "speaker.wave.1"
+        case ..<134: return "speaker.wave.2"
         default: return "speaker.wave.3"
         }
     }
