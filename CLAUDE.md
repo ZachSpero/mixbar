@@ -57,6 +57,24 @@ If the driver fails to load, check `log show --last 5m --predicate
   "volumesAreDisplayScale" UserDefaults flag marks migrated data.
 - `sudo launchctl kickstart -k system/com.apple.audio.coreaudiod` is blocked
   by SIP on Sequoia. Use `sudo killall coreaudiod`.
+- NEVER call the HAL while holding the engine's stateLock. The HAL blocks
+  requests until our property listener callbacks return, and the callbacks
+  take stateLock, so holding it across a HAL call deadlocks the app (64
+  blocked dispatch threads, main thread hangs, AppleEvents time out with
+  -1712). Copy state under the lock, release it, then call the HAL. See
+  stopAndRestoreDefaultDevice / reassertDefaultDevice.
+- The kAudioDevicePropertyDeviceIsRunningSomewhere handler must READ the
+  property and only Start() playthrough when it's true. Calling Start +
+  StopIfIdle unconditionally creates an infinite feedback loop: our own
+  playthrough starting and stopping fires the same notification. Mirror
+  BGMAudioDeviceManager's handlers exactly.
+- The driver identifies this app by bundle ID (kBGMAppBundleID), which is
+  how StopIfIdle can tell "no clients other than us". mixbarctl and bare
+  binaries (no bundle) are treated as regular clients, so playthrough never
+  idles while they run IO. Launch the real bundle when testing idle logic.
+- The app enforces single instance (a second launch quits itself before
+  starting the engine). Double-clicking the app while it runs opens the
+  mixer window via applicationShouldHandleReopen.
 
 ## Testing changes
 

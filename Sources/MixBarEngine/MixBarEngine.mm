@@ -155,45 +155,62 @@ static OSStatus MXBDeviceListenerProc(AudioObjectID inObjectID,
 }
 
 - (void)stopAndRestoreDefaultDevice {
+    // Copy state under the lock, then call the HAL with the lock RELEASED.
+    // The HAL can block our requests until our property listener callbacks
+    // return, and those callbacks take stateLock, so holding it across a
+    // HAL call deadlocks the whole app. (Same pattern as BGMApp.)
+    BGMBackgroundMusicDevice *deviceCopy;
+    AudioObjectID outputDeviceID;
+    BOOL wasActive;
+
     [stateLock lock];
-    @try {
-        if (!mixbarDevice || !playThroughActive) {
-            return;
-        }
+    deviceCopy = mixbarDevice;
+    outputDeviceID = outputDevice.GetObjectID();
+    wasActive = playThroughActive;
+    playThroughActive = NO;
+    [stateLock unlock];
 
-        [self removeListeners];
+    if (!deviceCopy || !wasActive) {
+        return;
+    }
 
-        try {
-            mixbarDevice->UnsetAsOSDefault(outputDevice.GetObjectID());
-        } catch (const CAException &e) {
-            NSLog(@"MixBarEngine: failed to restore default device (%d)", (int)e.GetError());
-        }
+    [self removeListeners];
 
-        try {
-            playThrough.Deactivate();
-            playThroughUISounds.Deactivate();
-            deviceControlSync.Deactivate();
-        } catch (const CAException &e) {
-            NSLog(@"MixBarEngine: error deactivating playthrough (%d)", (int)e.GetError());
-        }
-    } @finally {
-        [stateLock unlock];
+    try {
+        deviceCopy->UnsetAsOSDefault(outputDeviceID);
+    } catch (const CAException &e) {
+        NSLog(@"MixBarEngine: failed to restore default device (%d)", (int)e.GetError());
+    }
+
+    try {
+        playThrough.Deactivate();
+        playThroughUISounds.Deactivate();
+        deviceControlSync.Deactivate();
+    } catch (const CAException &e) {
+        NSLog(@"MixBarEngine: error deactivating playthrough (%d)", (int)e.GetError());
     }
 }
 
 - (void)reassertDefaultDevice {
+    // Copy state under the lock; call the HAL with the lock released.
+    // See stopAndRestoreDefaultDevice for why holding stateLock across a
+    // HAL call deadlocks.
+    BGMBackgroundMusicDevice *deviceCopy;
+    BOOL active;
+
     [stateLock lock];
-    @try {
-        if (!mixbarDevice || !playThroughActive) {
-            return;
-        }
-        try {
-            mixbarDevice->SetAsOSDefault();
-        } catch (const CAException &e) {
-            NSLog(@"MixBarEngine: failed to reassert default device (%d)", (int)e.GetError());
-        }
-    } @finally {
-        [stateLock unlock];
+    deviceCopy = mixbarDevice;
+    active = playThroughActive;
+    [stateLock unlock];
+
+    if (!deviceCopy || !active) {
+        return;
+    }
+
+    try {
+        deviceCopy->SetAsOSDefault();
+    } catch (const CAException &e) {
+        NSLog(@"MixBarEngine: failed to reassert default device (%d)", (int)e.GetError());
     }
 }
 
@@ -509,12 +526,24 @@ static OSStatus MXBDeviceListenerProc(AudioObjectID inObjectID,
                     numAddresses:(UInt32)numAddresses
                        addresses:(const AudioObjectPropertyAddress *)addresses {
     for (UInt32 i = 0; i < numAddresses; i++) {
+        AudioObjectID notifiedDeviceID = deviceID;
         switch (addresses[i].mSelector) {
-            case kAudioDevicePropertyDeviceIsRunningSomewhere:
-            case kAudioDeviceCustomPropertyDeviceIsRunningSomewhereOtherThanBGMApp: {
-                AudioObjectID notifiedDeviceID = deviceID;
+            case kAudioDevicePropertyDeviceIsRunningSomewhere: {
+                // Start playthrough when a client starts IO on the device.
+                // Only start when the property actually reads true; starting
+                // unconditionally loops, because our own playthrough stopping
+                // and starting also fires this notification.
                 dispatch_async(BGMGetDispatchQueue_PriorityUserInteractive(), ^{
-                    [self startOrStopPlayThroughForDevice:notifiedDeviceID];
+                    [self startPlayThroughIfDeviceRunning:notifiedDeviceID];
+                });
+                break;
+            }
+            case kAudioDeviceCustomPropertyDeviceIsRunningSomewhereOtherThanBGMApp: {
+                // The driver fires this after other clients have been idle
+                // for a couple of seconds. StopIfIdle re-checks the property
+                // itself, so it's safe to call either way.
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    [self stopPlayThroughIfIdle:notifiedDeviceID];
                 });
                 break;
             }
@@ -524,23 +553,49 @@ static OSStatus MXBDeviceListenerProc(AudioObjectID inObjectID,
     }
 }
 
-- (void)startOrStopPlayThroughForDevice:(AudioObjectID)deviceID {
+- (BGMPlayThrough &)playThroughForDevice:(AudioObjectID)deviceID {
+    return (deviceID == mixbarDevice->GetUISoundsBGMDeviceInstance().GetObjectID())
+        ? playThroughUISounds
+        : playThrough;
+}
+
+- (void)startPlayThroughIfDeviceRunning:(AudioObjectID)deviceID {
     [stateLock lock];
     @try {
-        if (!mixbarDevice) {
+        if (!mixbarDevice || outputDevice.GetObjectID() == kAudioObjectUnknown) {
             return;
         }
 
-        BGMPlayThrough &pt =
-            (deviceID == mixbarDevice->GetUISoundsBGMDeviceInstance().GetObjectID())
-                ? playThroughUISounds
-                : playThrough;
-
+        bool isRunningSomewhere = true;
         try {
-            pt.Start();
-            pt.StopIfIdle();
+            isRunningSomewhere = (BGMAudioDevice(deviceID).GetPropertyData_UInt32(
+                CAPropertyAddress(kAudioDevicePropertyDeviceIsRunningSomewhere)) != 0);
         } catch (const CAException &e) {
-            NSLog(@"MixBarEngine: playthrough start/stop error (%d)", (int)e.GetError());
+            // Try to start anyway if we can't read the property.
+        }
+
+        if (isRunningSomewhere) {
+            try {
+                [self playThroughForDevice:deviceID].Start();
+            } catch (const CAException &e) {
+                NSLog(@"MixBarEngine: playthrough start error (%d)", (int)e.GetError());
+            }
+        }
+    } @finally {
+        [stateLock unlock];
+    }
+}
+
+- (void)stopPlayThroughIfIdle:(AudioObjectID)deviceID {
+    [stateLock lock];
+    @try {
+        if (!mixbarDevice || outputDevice.GetObjectID() == kAudioObjectUnknown) {
+            return;
+        }
+        try {
+            [self playThroughForDevice:deviceID].StopIfIdle();
+        } catch (const CAException &e) {
+            NSLog(@"MixBarEngine: playthrough stop error (%d)", (int)e.GetError());
         }
     } @finally {
         [stateLock unlock];

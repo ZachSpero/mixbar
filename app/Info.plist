@@ -24,6 +24,17 @@
 	<string>13.0</string>
 	<key>LSUIElement</key>
 	<true/>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.zachspero.mixbar.app</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>mixbar</string>
+			</array>
+		</dict>
+	</array>
 	<key>NSHumanReadableCopyright</key>
 	<string>GPLv2. Derived from Background Music (Background Music contributors).</string>
 	<key>NSPrincipalClass</key>

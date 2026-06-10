@@ -109,12 +109,9 @@ struct MixerView: View {
 }
 
 private struct OpenMixerWindowButton: View {
-    @Environment(\.openWindow) private var openWindow
-
     var body: some View {
         Button("Open Mixer") {
-            openWindow(id: "mixer")
-            NSApp.activate(ignoringOtherApps: true)
+            (NSApp.delegate as? AppDelegate)?.showMixerWindow()
         }
     }
 }

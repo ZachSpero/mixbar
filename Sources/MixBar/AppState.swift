@@ -98,6 +98,14 @@ final class AppState: ObservableObject {
         applyAllVolumes()
         observeWorkspace()
 
+        // Remember the device the engine actually picked so the next launch
+        // (when the default device is already MixBar) restores it instead of
+        // falling back to an arbitrary device.
+        let uid = engine?.outputDeviceUID ?? ""
+        if !uid.isEmpty {
+            defaults.set(uid, forKey: Self.outputUIDKey)
+        }
+
         // If an older instance of MixBar was quitting while we started, its
         // shutdown may have restored the real device as the default after we
         // took over. Reassert a few seconds in.
