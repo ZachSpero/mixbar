@@ -97,6 +97,22 @@ If the driver fails to load, check `log show --last 5m --predicate
   (e.g. `swift tools/setdefault.swift BuiltInSpeakerDevice`), useful for
   recovering a machine whose audio is stuck pointing at the wrong device.
 
+## App filtering
+
+The mixer only lists apps that play audio. Sources/MixBar/AudioApps.swift
+decides via two signals, unioned in AppState.shouldShow: (1) live audio
+activity from CoreAudio's process API (kAudioHardwarePropertyProcessObjectList
++ kAudioProcessPropertyIsRunning/Output/Input) - an app actually making or
+capturing sound, matched by behavior not name; helper bundle IDs
+(com.google.Chrome.helper) are prefix-matched to the parent app. (2) A
+generous keyword allowlist (browsers, media, comm, DJ, DAW) so known audio
+apps show while idle for pre-setting. Apps with a saved volume stay pinned.
+A 2s timer (AppState.activityTimer) refreshes the list so apps appear/vanish
+as they start/stop playing. Verify with the standalone logic in a swift
+script against NSWorkspace.runningApplications; expect browsers/Spotify/Zoom
+shown and Finder/Obsidian/IDEs hidden. The allowlist is intentionally broad:
+false positives are harmless, and the activity signal backstops any miss.
+
 ## Testing changes
 
 1. `make -C driver && swift build` must both pass.

@@ -19,6 +19,8 @@ struct MixerView: View {
 
             if let error = state.engineError {
                 errorView(error)
+            } else if state.apps.isEmpty {
+                emptyView
             } else {
                 appList
             }
@@ -69,6 +71,22 @@ struct MixerView: View {
             .padding(.vertical, 6)
         }
         .frame(maxHeight: compact ? 360 : 520)
+    }
+
+    private var emptyView: some View {
+        VStack(spacing: 8) {
+            Image(systemName: "speaker.wave.2")
+                .font(.title2)
+                .foregroundStyle(.secondary)
+            Text("No audio apps yet")
+                .font(.callout)
+            Text("Play something in a music app, browser, or call and it'll appear here.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+        }
+        .padding(24)
+        .frame(maxWidth: .infinity)
     }
 
     private func errorView(_ message: String) -> some View {

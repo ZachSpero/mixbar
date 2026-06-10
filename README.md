@@ -12,8 +12,10 @@ or headphones.
 
 ## What you get
 
-- A menu-bar popover listing your running apps, each with a volume slider
-  and mute button
+- A menu-bar popover listing the apps that actually play audio (music
+  players, browsers, calls, DJ and production apps), each with a volume
+  slider and mute button. Apps that never make sound (Finder, note apps,
+  IDEs, spreadsheets) are hidden; anything else appears the moment it plays.
 - A full mixer window (Open Mixer) with the same controls and more room
 - An output device picker (speakers, headphones, USB interfaces)
 - Volumes persist across app launches and restarts

@@ -50,6 +50,7 @@ final class AppState: ObservableObject {
     private var engine: MixBarEngine?
     private let defaults = UserDefaults.standard
     private var observers: [NSObjectProtocol] = []
+    private var activityTimer: Timer?
 
     private static let volumesKey = "appVolumes"
     private static let mutedKey = "mutedApps"
@@ -98,6 +99,12 @@ final class AppState: ObservableObject {
         applyAllVolumes()
         observeWorkspace()
 
+        // Apps appear in the mixer when they start playing audio, so refresh
+        // the list on a light timer while we're running.
+        activityTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] _ in
+            Task { @MainActor in self?.refreshApps() }
+        }
+
         // Remember the device the engine actually picked so the next launch
         // (when the default device is already MixBar) restores it instead of
         // falling back to an arbitrary device.
@@ -115,6 +122,8 @@ final class AppState: ObservableObject {
     }
 
     func shutdown() {
+        activityTimer?.invalidate()
+        activityTimer = nil
         engine?.stopAndRestoreDefaultDevice()
         engine = nil
         engineRunning = false
@@ -125,6 +134,7 @@ final class AppState: ObservableObject {
     func refreshApps() {
         let workspace = NSWorkspace.shared
         let myPID = ProcessInfo.processInfo.processIdentifier
+        let activeBundleIDs = AudioApps.activeBundleIDs()
 
         apps = workspace.runningApplications
             .filter { $0.activationPolicy == .regular && $0.processIdentifier != myPID }
@@ -134,7 +144,35 @@ final class AppState: ObservableObject {
                            name: $0.localizedName ?? $0.bundleIdentifier ?? "pid \($0.processIdentifier)",
                            icon: $0.icon)
             }
+            .filter { shouldShow($0, activeBundleIDs: activeBundleIDs) }
             .sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
+    }
+
+    // An app belongs in the mixer if it's making sound right now, is a known
+    // audio app (so it can be pre-set while idle), or the user has already
+    // given it a volume. Everything else (Excel, Finder, note apps, IDEs) is
+    // hidden so the mixer only lists things that actually play audio.
+    private func shouldShow(_ app: RunningApp, activeBundleIDs: Set<String>) -> Bool {
+        if volumes[volumeKey(for: app)] != nil {
+            return true
+        }
+        if AudioApps.isLikelyAudioApp(bundleID: app.bundleID, name: app.name) {
+            return true
+        }
+        if let bundleID = app.bundleID, isAudioActive(bundleID: bundleID, in: activeBundleIDs) {
+            return true
+        }
+        return false
+    }
+
+    // Active bundle IDs include helper processes (com.google.Chrome.helper),
+    // so match the app's bundle ID as an exact or parent match.
+    private func isAudioActive(bundleID: String, in active: Set<String>) -> Bool {
+        if active.contains(bundleID) {
+            return true
+        }
+        let prefix = bundleID + "."
+        return active.contains { $0.hasPrefix(prefix) }
     }
 
     private func observeWorkspace() {
