@@ -51,6 +51,8 @@ final class AppState: ObservableObject {
     private let defaults = UserDefaults.standard
     private var observers: [NSObjectProtocol] = []
     private var activityTimer: Timer?
+    /// Bundle IDs doing audio IO as of the last refresh (incl. helper procs).
+    private var lastActiveBundleIDs: Set<String> = []
 
     private static let volumesKey = "appVolumes"
     private static let mutedKey = "mutedApps"
@@ -149,6 +151,7 @@ final class AppState: ObservableObject {
         let workspace = NSWorkspace.shared
         let myPID = ProcessInfo.processInfo.processIdentifier
         let activeBundleIDs = AudioApps.activeBundleIDs()
+        lastActiveBundleIDs = activeBundleIDs
 
         apps = workspace.runningApplications
             .filter { $0.activationPolicy == .regular && $0.processIdentifier != myPID }
@@ -231,10 +234,17 @@ final class AppState: ObservableObject {
     private func pushVolume(_ displayVolume: Int, pid: pid_t, bundleID: String?) {
         let dv = driverVolume(displayVolume)
         engine?.setVolume(dv, forPID: pid, bundleID: bundleID)
-        if let bundleID, let aliases = volumeAliases[bundleID] {
-            for alias in aliases {
-                engine?.setVolume(dv, forPID: -1, bundleID: alias)
-            }
+        guard let bundleID else { return }
+
+        // Configured aliases (e.g. an Electron app's audio helper).
+        for alias in volumeAliases[bundleID] ?? [] {
+            engine?.setVolume(dv, forPID: -1, bundleID: alias)
+        }
+        // Plus any live child process (<bundle>.*) currently doing audio IO,
+        // so multiprocess apps are covered even without a configured alias.
+        let prefix = bundleID + "."
+        for child in lastActiveBundleIDs where child.hasPrefix(prefix) {
+            engine?.setVolume(dv, forPID: -1, bundleID: child)
         }
     }
 
