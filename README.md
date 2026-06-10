@@ -39,6 +39,11 @@ driver into `/Library/Audio/Plug-Ins/HAL`, restarts the audio system (your
 audio blips for about a second), installs MixBar.app into /Applications, and
 launches it. Look for the sliders icon in your menu bar.
 
+On first launch macOS asks for microphone access. Click Allow. MixBar does
+not touch your actual microphone; it reads the system audio stream from its
+own virtual device, which macOS classifies as audio capture. Without that
+permission macOS hands MixBar silence and you'll hear nothing.
+
 Have Claude Code or another coding agent on your machine? Point it at this
 repo and say "install this". `CLAUDE.md` tells it everything it needs.
 

@@ -184,7 +184,6 @@ static OSStatus MXBDeviceListenerProc(AudioObjectID inObjectID,
 
     try {
         playThrough.Deactivate();
-        playThroughUISounds.Deactivate();
         deviceControlSync.Deactivate();
     } catch (const CAException &e) {
         NSLog(@"MixBarEngine: error deactivating playthrough (%d)", (int)e.GetError());
@@ -235,7 +234,22 @@ static OSStatus MXBDeviceListenerProc(AudioObjectID inObjectID,
             return defaultDevice.GetObjectID();
         }
 
+        // The default device is our own virtual device (stale from a crash
+        // or another instance), so we can't tell what the user was using.
+        // Prefer the built-in speakers over an arbitrary device like a dock.
         NSArray<MXBOutputDevice *> *devices = [self outputDevices];
+        for (MXBOutputDevice *d in devices) {
+            try {
+                BGMAudioDevice device(d.audioObjectID);
+                UInt32 transport = device.GetPropertyData_UInt32(
+                    CAPropertyAddress(kAudioDevicePropertyTransportType));
+                if (transport == kAudioDeviceTransportTypeBuiltIn) {
+                    return d.audioObjectID;
+                }
+            } catch (const CAException &e) {
+                continue;
+            }
+        }
         if (devices.count > 0) {
             return devices[0].audioObjectID;
         }
@@ -341,18 +355,17 @@ static OSStatus MXBDeviceListenerProc(AudioObjectID inObjectID,
             playThrough.SetDevices(mixbarDevice, &newOutputDevice);
             playThrough.Activate();
 
-            BGMAudioDevice uiSoundsDevice = mixbarDevice->GetUISoundsBGMDeviceInstance();
-            playThroughUISounds.SetDevices(&uiSoundsDevice, &newOutputDevice);
-            playThroughUISounds.Activate();
+            // Note: no playthrough for the UI-sounds device. Nothing routes
+            // audio to it (we never set it as the system-sounds default),
+            // and a second output IOProc on the same output device starved
+            // the main playthrough's output IOProc in testing.
 
             outputDevice = newOutputDevice;
 
             // Audio might be playing already, so start playthrough, then stop
             // it again if nothing is actually playing (it burns CPU).
             playThrough.Start();
-            playThroughUISounds.Start();
             playThrough.StopIfIdle();
-            playThroughUISounds.StopIfIdle();
 
             playThroughActive = YES;
             return YES;
@@ -490,7 +503,6 @@ static OSStatus MXBDeviceListenerProc(AudioObjectID inObjectID,
     };
 
     addListeners(mixbarDevice->GetObjectID());
-    addListeners(mixbarDevice->GetUISoundsBGMDeviceInstance().GetObjectID());
 
     listenersRegistered = YES;
 }
@@ -517,7 +529,6 @@ static OSStatus MXBDeviceListenerProc(AudioObjectID inObjectID,
     };
 
     removeFrom(mixbarDevice->GetObjectID());
-    removeFrom(mixbarDevice->GetUISoundsBGMDeviceInstance().GetObjectID());
 
     listenersRegistered = NO;
 }
@@ -554,9 +565,9 @@ static OSStatus MXBDeviceListenerProc(AudioObjectID inObjectID,
 }
 
 - (BGMPlayThrough &)playThroughForDevice:(AudioObjectID)deviceID {
-    return (deviceID == mixbarDevice->GetUISoundsBGMDeviceInstance().GetObjectID())
-        ? playThroughUISounds
-        : playThrough;
+    // Only the main device has playthrough. (No UI-sounds playthrough; see
+    // setOutputDeviceByID.)
+    return playThrough;
 }
 
 - (void)startPlayThroughIfDeviceRunning:(AudioObjectID)deviceID {

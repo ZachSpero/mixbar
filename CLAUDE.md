@@ -72,9 +72,30 @@ If the driver fails to load, check `log show --last 5m --predicate
   how StopIfIdle can tell "no clients other than us". mixbarctl and bare
   binaries (no bundle) are treated as regular clients, so playthrough never
   idles while they run IO. Launch the real bundle when testing idle logic.
-- The app enforces single instance (a second launch quits itself before
-  starting the engine). Double-clicking the app while it runs opens the
-  mixer window via applicationShouldHandleReopen.
+- The app enforces single instance: a second launch waits up to 5 seconds
+  for an existing (usually mid-shutdown) instance to exit, then defers to
+  it. Double-clicking the app while it runs opens the mixer window via
+  applicationShouldHandleReopen.
+- macOS requires AUDIO-CAPTURE (microphone) permission to read from the
+  virtual device's input stream. Without it, CoreAudio silently feeds the
+  app ZEROS: playthrough runs, devices show running=true, but the speakers
+  get silence. NSMicrophoneUsageDescription is in app/Info.plist; the user
+  must click Allow on first launch. Processes exec'd from a terminal
+  inherit the terminal's mic permission, which can mask this bug in
+  testing: ALWAYS test via `open /Applications/MixBar.app`.
+- Do NOT run a second playthrough for the UI-sounds device. Two output
+  IOProcs from one process on the same output device starved the main
+  playthrough's output IOProc (it stopped getting called, so the speakers
+  got silence). Nothing routes to the UI-sounds device anyway unless the
+  app sets it as kAudioHardwarePropertyDefaultSystemOutputDevice, which we
+  don't.
+- "Device running" is NOT proof audio is flowing. IOProcs can run while
+  delivering only zeros. To truly verify, play a sound and either record
+  the mic (tools/audiocheck.swift prints peak RMS; silence is about 0.3,
+  audible sound is over 2) or record from the MixBar device's input stream.
+- tools/setdefault.swift sets the system default output by UID substring
+  (e.g. `swift tools/setdefault.swift BuiltInSpeakerDevice`), useful for
+  recovering a machine whose audio is stuck pointing at the wrong device.
 
 ## Testing changes
 

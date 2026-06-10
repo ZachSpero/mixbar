@@ -35,6 +35,8 @@
 			</array>
 		</dict>
 	</array>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>MixBar reads the system audio stream from its virtual audio device (not your microphone) so it can play it through your speakers. macOS treats that as audio-capture access.</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>GPLv2. Derived from Background Music (Background Music contributors).</string>
 	<key>NSPrincipalClass</key>

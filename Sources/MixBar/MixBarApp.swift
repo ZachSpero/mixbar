@@ -28,17 +28,31 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         // Single instance only. A second instance would grab the wrong
         // output device (the default is already MixBar by then) and stomp
-        // the first instance's state. Quit before starting the engine so
-        // shutdown doesn't touch the default device.
+        // the first instance's state. An existing instance is often one
+        // that's mid-shutdown (an update or relaunch), so give it a few
+        // seconds to exit before deferring to it.
+        waitForOtherInstancesThenStart(attemptsLeft: 10)
+    }
+
+    private func waitForOtherInstancesThenStart(attemptsLeft: Int) {
         let bundleID = Bundle.main.bundleIdentifier ?? "com.zachspero.mixbar.app"
         let others = NSRunningApplication.runningApplications(withBundleIdentifier: bundleID)
             .filter { $0.processIdentifier != ProcessInfo.processInfo.processIdentifier }
-        if !others.isEmpty {
+
+        if others.isEmpty {
+            state.start()
+            return
+        }
+
+        if attemptsLeft <= 0 {
+            // A healthy instance is already running; defer to it.
             NSApp.terminate(nil)
             return
         }
 
-        state.start()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            self?.waitForOtherInstancesThenStart(attemptsLeft: attemptsLeft - 1)
+        }
 
         // Restore the default output device if we get killed politely.
         signal(SIGTERM, SIG_IGN)
