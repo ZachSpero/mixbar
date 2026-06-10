@@ -22,7 +22,7 @@ guard args.count >= 2 else {
 }
 
 switch args[1] {
-case "devices", "volumes", "set":
+case "devices", "volumes", "set", "status":
     // These commands talk to the driver without starting playthrough or
     // changing the default device, so they can run alongside the MixBar app.
     let engine: MixBarEngine
@@ -33,6 +33,11 @@ case "devices", "volumes", "set":
     }
 
     switch args[1] {
+    case "status":
+        print("deviceIsRunningSomewhere: \(engine.deviceIsRunningSomewhere)")
+        for d in engine.outputDevices() {
+            print("\(d.name): running=\(MixBarEngine.deviceIsRunning(d.audioObjectID))")
+        }
     case "devices":
         for d in engine.outputDevices() {
             print("\(d.audioObjectID)\t\(d.uid)\t\(d.name)")

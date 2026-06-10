@@ -77,6 +77,11 @@ extern NSString *const MixBarEngineErrorDomain;
 /// True if any client app is currently playing audio through MixBar.
 @property (nonatomic, readonly) BOOL deviceIsRunningSomewhere;
 
+/// True if the given device currently has IO running. When MixBar is the
+/// default device and audio is playing, the real output device should be
+/// running because playthrough is pumping audio into it.
++ (BOOL)deviceIsRunning:(UInt32)deviceID;
+
 @end
 
 NS_ASSUME_NONNULL_END

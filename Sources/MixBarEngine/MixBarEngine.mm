@@ -418,6 +418,15 @@ static OSStatus MXBDeviceListenerProc(AudioObjectID inObjectID,
 
 #pragma mark Playthrough start/stop notifications
 
++ (BOOL)deviceIsRunning:(UInt32)deviceID {
+    try {
+        BGMAudioDevice device(deviceID);
+        return device.IsRunningSomewhere();
+    } catch (const CAException &e) {
+        return NO;
+    }
+}
+
 - (BOOL)deviceIsRunningSomewhere {
     try {
         return mixbarDevice->IsRunningSomewhere();
