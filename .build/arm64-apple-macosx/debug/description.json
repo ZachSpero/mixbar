@@ -24,7 +24,15 @@
       "inputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/zacharyspero/Code/mixbar/Sources/MixBar/main.swift"
+          "name" : "/Users/zacharyspero/Code/mixbar/Sources/MixBar/AppState.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/Sources/MixBar/MixBarApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/Sources/MixBar/MixerView.swift"
         },
         {
           "kind" : "file",
@@ -135,7 +143,9 @@
       "moduleName" : "MixBar",
       "moduleOutputPath" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/Modules/MixBar.swiftmodule",
       "objects" : [
-        "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/main.swift.o"
+        "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/AppState.swift.o",
+        "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/MixBarApp.swift.o",
+        "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/MixerView.swift.o"
       ],
       "otherArguments" : [
         "-target",
@@ -183,7 +193,15 @@
       "outputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/main.swift.o"
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/AppState.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/MixBarApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/MixerView.swift.o"
         },
         {
           "kind" : "file",
@@ -192,7 +210,9 @@
       ],
       "prepareForIndexing" : false,
       "sources" : [
-        "/Users/zacharyspero/Code/mixbar/Sources/MixBar/main.swift"
+        "/Users/zacharyspero/Code/mixbar/Sources/MixBar/AppState.swift",
+        "/Users/zacharyspero/Code/mixbar/Sources/MixBar/MixBarApp.swift",
+        "/Users/zacharyspero/Code/mixbar/Sources/MixBar/MixerView.swift"
       ],
       "tempsPath" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build",
       "wholeModuleOptimization" : false
@@ -390,7 +410,9 @@
       "mixbar",
       "-incremental",
       "-c",
-      "/Users/zacharyspero/Code/mixbar/Sources/MixBar/main.swift",
+      "/Users/zacharyspero/Code/mixbar/Sources/MixBar/AppState.swift",
+      "/Users/zacharyspero/Code/mixbar/Sources/MixBar/MixBarApp.swift",
+      "/Users/zacharyspero/Code/mixbar/Sources/MixBar/MixerView.swift",
       "-I",
       "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/Modules",
       "-target",
@@ -535,7 +557,15 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/zacharyspero/Code/mixbar/Sources/MixBar/main.swift"
+          "name" : "/Users/zacharyspero/Code/mixbar/Sources/MixBar/AppState.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/Sources/MixBar/MixBarApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/Sources/MixBar/MixerView.swift"
         }
       ],
       "outputFilePath" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/sources"
@@ -549,7 +579,15 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/main.swift.o"
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/AppState.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/MixBarApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/MixerView.swift.o"
         },
         {
           "kind" : "file",

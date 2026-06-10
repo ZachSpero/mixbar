@@ -181,6 +181,22 @@ static OSStatus MXBDeviceListenerProc(AudioObjectID inObjectID,
     }
 }
 
+- (void)reassertDefaultDevice {
+    [stateLock lock];
+    @try {
+        if (!mixbarDevice || !playThroughActive) {
+            return;
+        }
+        try {
+            mixbarDevice->SetAsOSDefault();
+        } catch (const CAException &e) {
+            NSLog(@"MixBarEngine: failed to reassert default device (%d)", (int)e.GetError());
+        }
+    } @finally {
+        [stateLock unlock];
+    }
+}
+
 #pragma mark Output devices
 
 // The current system default, unless that's one of our virtual devices (e.g.

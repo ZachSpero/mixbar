@@ -1,4 +1,6 @@
-/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/main.swift.o
+/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/AppState.swift.o
+/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/MixBarApp.swift.o
+/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/MixerView.swift.o
 /Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/MixBarEngine.mm.o
 /Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMAudioDevice.cpp.o
 /Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBarEngine.build/vendor/BGMBackgroundMusicDevice.cpp.o

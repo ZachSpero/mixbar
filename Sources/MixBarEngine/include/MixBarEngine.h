@@ -50,6 +50,10 @@ extern NSString *const MixBarEngineErrorDomain;
 /// default. Call before the app quits.
 - (void)stopAndRestoreDefaultDevice;
 
+/// Sets MixBar as the default output device again if something else took it
+/// back (for example a quitting older instance restoring its device).
+- (void)reassertDefaultDevice;
+
 /// All devices that can currently be used as the real output device.
 - (NSArray<MXBOutputDevice *> *)outputDevices;
 

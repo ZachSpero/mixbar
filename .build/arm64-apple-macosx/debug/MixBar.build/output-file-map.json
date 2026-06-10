@@ -2,10 +2,22 @@
   "": {
     "swift-dependencies": "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/master.swiftdeps"
   },
-  "/Users/zacharyspero/Code/mixbar/Sources/MixBar/main.swift": {
-    "dependencies": "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/main.d",
-    "object": "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/main.swift.o",
-    "swiftmodule": "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/main~partial.swiftmodule",
-    "swift-dependencies": "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/main.swiftdeps"
+  "/Users/zacharyspero/Code/mixbar/Sources/MixBar/AppState.swift": {
+    "dependencies": "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/AppState.d",
+    "object": "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/AppState.swift.o",
+    "swiftmodule": "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/AppState~partial.swiftmodule",
+    "swift-dependencies": "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/AppState.swiftdeps"
+  },
+  "/Users/zacharyspero/Code/mixbar/Sources/MixBar/MixBarApp.swift": {
+    "dependencies": "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/MixBarApp.d",
+    "object": "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/MixBarApp.swift.o",
+    "swiftmodule": "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/MixBarApp~partial.swiftmodule",
+    "swift-dependencies": "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/MixBarApp.swiftdeps"
+  },
+  "/Users/zacharyspero/Code/mixbar/Sources/MixBar/MixerView.swift": {
+    "dependencies": "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/MixerView.d",
+    "object": "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/MixerView.swift.o",
+    "swiftmodule": "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/MixerView~partial.swiftmodule",
+    "swift-dependencies": "/Users/zacharyspero/Code/mixbar/.build/arm64-apple-macosx/debug/MixBar.build/MixerView.swiftdeps"
   }
 }
